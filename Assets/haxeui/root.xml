@@ -1,0 +1,44 @@
+<vbox id="topBar" width="100%" height="100%">
+    <style>
+        .imageContainer {
+            border: 1px solid black;
+        }
+
+        #sideBar {
+            padding: 20px;
+        }
+    </style>
+    <menubar id="menuBar" width="100%">
+        <menu text="File">
+            <menuitem id="loadMenuButton" text="Load Input Image" />
+            <menuitem id="saveMenuButton" text="Save Output Image" />
+            <menuitem id="quitMenuButton" text="Quit" />
+        </menu>
+    </menubar>
+    <hbox width="100%" height="100%">
+        <vbox id="sideBar" width="300" height="100%">
+            <property-grid id="optionsPropertyGrid" width="100%" height="100%">
+                <property-group text="Options">
+                    <property id="downsampleProperty" label="Downsample Factor" type="float" value="6" min="1" max="100" />
+                    <property id="paletteProperty" label="Palette Colors" type="float" value="8" min="2" max="16777216" />
+                    <property id="ditherProperty" label="Dither algorithm" type="list" value="none">
+                        <data>
+                            <item text="none" />
+                            <item text="naive" />
+                            <item text="bayer" />
+                            <item text="floyd" />
+                            <item text="atkinson" />
+                        </data>
+                    </property>    
+                </property-group>
+            </property-grid>
+            <button id="pyxelateButton" text="Pyxelate!" width="80" height="40" verticalAlign="bottom" horizontalAlign="center" />
+        </vbox>
+        <box styleName="imageContainer" width="100%" height="100%">
+            <image id="inputImage" verticalAlign="center" horizontalAlign="center" />
+        </box>
+        <box styleName="imageContainer" width="100%" height="100%">
+            <image id="outputImage" verticalAlign="center" horizontalAlign="center" />
+        </box>
+    </hbox>
+</vbox>

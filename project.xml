@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Pyxelate" package="com.sample.pyxelate" version="1.0.0" company="Company Name" />
+	<app main="Main" path="Export" file="Pyxelate" />
+
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	<haxelib name="haxeui-core" />
+	<haxelib name="haxeui-openfl" />
+	<haxelib name="hxcpp-debug-server" />
+	
+	<assets path="Assets" rename="assets" />
+	
+</project>
