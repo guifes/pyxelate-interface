@@ -56,14 +56,14 @@ class Root extends VBox
 	function openSaveFileDialog(event: MouseEvent)
 	{
 		var dialog = new FileDialog();
-		dialog.browse(FileDialogType.SAVE);
+		dialog.browse(FileDialogType.SAVE, "png", null, "Save input image");
 		dialog.onSelect.add(path -> _menuDelegate.onSave(path));
 	}
 
 	function openLoadFileDialog(event: MouseEvent)
 	{
 		var dialog = new FileDialog();
-		dialog.browse(FileDialogType.OPEN);
+		dialog.browse(FileDialogType.OPEN, "*.jpg;*.gif;*.png", null, "Load input image");
 		dialog.onSelect.add(path -> _menuDelegate.onLoad(path));
 	}
 	
