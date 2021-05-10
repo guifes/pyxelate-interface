@@ -12,6 +12,24 @@ Before you attempt to run the program in this repo first you need to:
   - haxeui-openfl: [git]
   - openfl: [git]
 
+## Features
+Currently version only support these very basic features:
+- Setting downscale factor
+- Setting palette color count
+- Choosing dithering algorithm
+
+## To-do
+- Choosing from pre-defined palettes
+- Creating your own palette
+- Creating a model from an image and applying to another
+- Supporting all hyperparameters
+  - height, width
+  - upscale
+  - alpha
+  - sobel
+  - depth
+  - boost
+
 ## Screenshot
 
 ![screenshot](ss.png)
