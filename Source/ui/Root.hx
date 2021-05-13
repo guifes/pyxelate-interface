@@ -1,4 +1,4 @@
-package;
+package ui;
 
 import lime.ui.FileDialogType;
 import haxe.ui.events.MouseEvent;
@@ -10,42 +10,33 @@ import haxe.ui.containers.VBox;
 class Root extends VBox
 {
 	var _menuDelegate: IMenuActions;
-	var _config: Config;	
+	var _inputTab: InputTab;
+	var _paletteTab: PaletteTab;
 
-	public function new(menuDelegate: IMenuActions, config: Config)
+	public function new(menuDelegate: IMenuActions)
 	{
 		super();
-
-		_config = config;
+		
 		_menuDelegate = menuDelegate;
+
+		_inputTab = new InputTab();
+		_paletteTab = new PaletteTab();
+
+		configTabView.addComponent(_inputTab);
+		configTabView.addComponent(_paletteTab);
 
 		loadMenuButton.onClick = openLoadFileDialog;
 		saveMenuButton.onClick = openSaveFileDialog;
 		quitMenuButton.onClick = quit;
 		pyxelateButton.onClick = pyxelate;
-
-		downsampleProperty.onChange = e ->
-		{
-			_config.downsample = e.target.value;
-			_menuDelegate.onUpdateConfig(_config);
-		};
-
-		paletteProperty.onChange = e ->
-		{
-			_config.palette = e.target.value;
-			_menuDelegate.onUpdateConfig(_config);
-		};
-
-		ditherProperty.onChange = e ->
-		{
-			_config.dither = e.target.value.text;
-			_menuDelegate.onUpdateConfig(_config);
-		};
 	}
 
 	function pyxelate(event: MouseEvent)
 	{
-		_menuDelegate.pyxelate();
+		if(configTabView.selectedPage == _inputTab)
+			_menuDelegate.pyxelateWithInput(_inputTab.config);
+		else if(configTabView.selectedPage == _paletteTab)
+			_menuDelegate.pyxelateWithPalette(_paletteTab.config);
 	}
 
 	function quit(event: MouseEvent)
@@ -70,6 +61,7 @@ class Root extends VBox
 	public function displayInputImage(bitmapData: BitmapData)
 	{
 		inputImage.resource = bitmapData;
+		inputImageDimensionsLabel.text = '${bitmapData.width}x${bitmapData.height}';
 	}
 
 	public function displayOutputImage(bitmapData: BitmapData)
@@ -77,5 +69,7 @@ class Root extends VBox
 		outputImage.width = inputImage.width;
 		outputImage.height = inputImage.height;
 		outputImage.resource = bitmapData;
+
+		outputImageDimensionsLabel.text = '${bitmapData.width}x${bitmapData.height}';
 	}
 }

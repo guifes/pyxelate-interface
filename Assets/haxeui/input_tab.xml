@@ -1,0 +1,19 @@
+<box text="Input" width="100%" height="100%">
+    <property-grid id="optionsPropertyGrid" width="100%">
+        <property-group text="General">
+            <property id="downsampleProperty" label="Downsample Factor" type="float" value="6" min="1" max="100" />
+            <property id="ditherProperty" label="Dither algorithm" type="list" value="none">
+                <data>
+                    <item text="none" />
+                    <item text="naive" />
+                    <item text="bayer" />
+                    <item text="floyd" />
+                    <item text="atkinson" />
+                </data>
+            </property>
+        </property-group>
+        <property-group text="Palette">
+            <property id="paletteProperty" label="Palette Colors" type="float" value="8" min="2" max="16777216" />
+        </property-group>
+    </property-grid>
+</box>

@@ -1,0 +1,61 @@
+<box text="Palette" width="100%" height="100%">
+    <property-grid id="optionsPropertyGrid" width="100%">
+        <property-group text="General">
+            <property id="downsampleProperty" label="Downsample Factor" type="float" value="6" min="1" max="100" />
+            <property id="ditherProperty" label="Dither algorithm" type="list" value="none">
+                <data>
+                    <item text="none" />
+                    <item text="naive" />
+                    <item text="bayer" />
+                    <item text="floyd" />
+                    <item text="atkinson" />
+                </data>
+            </property>
+        </property-group>
+        <property-group text="Palette">
+            <property id="paletteProperty" label="Palette" type="list" value="1">
+                <data>
+                    <item value="1" text="TELETEXT" />
+                    <item value="2" text="CGA_MODE4_PAL1" />
+                    <item value="3" text="CGA_MODE5_PAL1" />
+                    <item value="4" text="CGA_MODE4_PAL2" />
+                    <item value="5" text="ZX_SPECTRUM" />
+                    <item value="6" text="APPLE_II_LO" />
+                    <item value="7" text="APPLE_II_HI" />
+                    <item value="8" text="COMMODORE_64" />
+                    <item value="9" text="GAMEBOY_COMBO_UP" />
+                    <item value="10" text="GAMEBOY_COMBO_DOWN" />
+                    <item value="11" text="GAMEBOY_COMBO_LEFT" />
+                    <item value="12" text="GAMEBOY_COMBO_RIGHT" />
+                    <item value="13" text="GAMEBOY_A_UP" />
+                    <item value="14" text="GAMEBOY_A_DOWN" />
+                    <item value="15" text="GAMEBOY_A_LEFT" />
+                    <item value="16" text="GAMEBOY_A_RIGHT" />
+                    <item value="17" text="GAMEBOY_B_UP" />
+                    <item value="18" text="GAMEBOY_B_DOWN" />
+                    <item value="19" text="GAMEBOY_B_LEFT" />
+                    <item value="20" text="GAMEBOY_B_RIGHT" />
+                    <item value="21" text="GAMEBOY_ORIGINAL" />
+                    <item value="22" text="GAMEBOY_POCKET" />
+                    <item value="23" text="GAMEBOY_VIRTUALBOY" />
+                    <item value="24" text="MICROSOFT_WINDOWS_16" />
+                    <item value="25" text="MICROSOFT_WINDOWS_20" />
+                    <item value="26" text="MICROSOFT_WINDOWS_PAINT" />
+                    <item value="27" text="PICO_8" />
+                    <item value="28" text="MSX" />
+                    <item value="29" text="MONO_OBRADINN_IBM" />
+                    <item value="30" text="MONO_OBRADINN_MAC" />
+                    <item value="31" text="MONO_BJG" />
+                    <item value="32" text="MONO_BW" />
+                    <item value="33" text="MONO_PHOSPHOR_AMBER" />
+                    <item value="34" text="MONO_PHOSPHOR_LTAMBER" />
+                    <item value="35" text="MONO_PHOSPHOR_GREEN1" />
+                    <item value="36" text="MONO_PHOSPHOR_GREEN2" />
+                    <item value="37" text="MONO_PHOSPHOR_GREEN3" />
+                    <item value="38" text="MONO_PHOSPHOR_APPLE" />
+                    <item value="39" text="MONO_PHOSPHOR_APPLEC" />
+                </data>
+            </property>
+        </property-group>
+    </property-grid>
+</box>

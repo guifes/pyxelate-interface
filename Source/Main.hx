@@ -1,5 +1,8 @@
 package;
 
+import model.PaletteConfig;
+import model.InputConfig;
+import ui.Root;
 import sys.io.File;
 import openfl.display.BitmapData;
 import openfl.display.Sprite;
@@ -8,7 +11,6 @@ import haxe.ui.Toolkit;
 class Main extends Sprite implements IMenuActions
 {
 	var _root: Root;
-	var _config: Config;
 	var _imagePath: String;
 
 	public function new()
@@ -17,9 +19,7 @@ class Main extends Sprite implements IMenuActions
 
 		Toolkit.init();
 
-		_config = new Config();
-
-		_root = new Root(this, _config);
+		_root = new Root(this);
 
 		stage.addChild(_root);
 	}
@@ -29,7 +29,7 @@ class Main extends Sprite implements IMenuActions
 		return _imagePath;
 	}
 
-	public function pyxelate()
+	public function pyxelateWithInput(config: InputConfig)
 	{
 		var params = [];
 
@@ -37,11 +37,11 @@ class Main extends Sprite implements IMenuActions
 		params.push("-i");
 		params.push(_imagePath);
 		params.push("-ds");
-		params.push('${_config.downsample}');
+		params.push('${config.downsample}');
 		params.push("-p");
-		params.push('${_config.palette}');
+		params.push('${config.palette}');
 		params.push("-d");
-		params.push('${_config.dither}');
+		params.push('${config.dither}');
 
 		var status = Sys.command("python", params);
 
@@ -51,9 +51,26 @@ class Main extends Sprite implements IMenuActions
 		_root.displayOutputImage(bitmapData);
 	}
 
-	public function onUpdateConfig(config: Config)
+	public function pyxelateWithPalette(config: PaletteConfig)
 	{
-		_config = config;
+		var params = [];
+
+		params.push("assets/python/index.py");
+		params.push("-i");
+		params.push(_imagePath);
+		params.push("-ds");
+		params.push('${config.downsample}');
+		params.push("-pt");
+		params.push('${config.palette}');
+		params.push("-d");
+		params.push('${config.dither}');
+
+		var status = Sys.command("python", params);
+
+		var bytes = File.getBytes("temp/output.png");
+		var bitmapData = BitmapData.fromBytes(bytes);
+		
+		_root.displayOutputImage(bitmapData);
 	}
 
 	public function onLoad(path:String)

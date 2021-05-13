@@ -12,5 +12,7 @@
 	<haxelib name="hxcpp-debug-server" />
 	
 	<assets path="Assets" rename="assets" />
+
+	<haxedef name="haxeui_nofilters" />
 	
 </project>
