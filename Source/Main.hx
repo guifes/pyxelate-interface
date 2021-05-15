@@ -1,5 +1,6 @@
 package;
 
+import sys.thread.Thread;
 import model.PaletteConfig;
 import model.InputConfig;
 import ui.Root;
@@ -43,12 +44,14 @@ class Main extends Sprite implements IMenuActions
 		params.push("-d");
 		params.push('${config.dither}');
 
-		var status = Sys.command("python", params);
-
-		var bytes = File.getBytes("temp/output.png");
-		var bitmapData = BitmapData.fromBytes(bytes);
+		Thread.create(() -> {
+			var status = Sys.command("python", params);
 		
-		_root.displayOutputImage(bitmapData);
+			var bytes = File.getBytes("temp/output.png");
+			var bitmapData = BitmapData.fromBytes(bytes);
+			
+			_root.displayOutputImage(bitmapData);
+		});
 	}
 
 	public function pyxelateWithPalette(config: PaletteConfig)
@@ -65,12 +68,14 @@ class Main extends Sprite implements IMenuActions
 		params.push("-d");
 		params.push('${config.dither}');
 
-		var status = Sys.command("python", params);
+		Thread.create(() -> {
+			var status = Sys.command("python", params);
 
-		var bytes = File.getBytes("temp/output.png");
-		var bitmapData = BitmapData.fromBytes(bytes);
-		
-		_root.displayOutputImage(bitmapData);
+			var bytes = File.getBytes("temp/output.png");
+			var bitmapData = BitmapData.fromBytes(bytes);
+			
+			_root.displayOutputImage(bitmapData);
+		});
 	}
 
 	public function onLoad(path:String)

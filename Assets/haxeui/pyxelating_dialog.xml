@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<vbox width="150">
+    <label text="Please wait..." horizontalAlign="center" />
+</vbox>

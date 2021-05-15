@@ -12,6 +12,7 @@ class Root extends VBox
 	var _menuDelegate: IMenuActions;
 	var _inputTab: InputTab;
 	var _paletteTab: PaletteTab;
+	var _dialog: PyxelatingDialog;
 
 	public function new(menuDelegate: IMenuActions)
 	{
@@ -19,6 +20,7 @@ class Root extends VBox
 		
 		_menuDelegate = menuDelegate;
 
+		_dialog = new PyxelatingDialog();
 		_inputTab = new InputTab();
 		_paletteTab = new PaletteTab();
 
@@ -33,6 +35,8 @@ class Root extends VBox
 
 	function pyxelate(event: MouseEvent)
 	{
+        _dialog.showDialog(true);
+
 		if(configTabView.selectedPage == _inputTab)
 			_menuDelegate.pyxelateWithInput(_inputTab.config);
 		else if(configTabView.selectedPage == _paletteTab)
@@ -54,7 +58,7 @@ class Root extends VBox
 	function openLoadFileDialog(event: MouseEvent)
 	{
 		var dialog = new FileDialog();
-		dialog.browse(FileDialogType.OPEN, "*.jpg;*.gif;*.png", null, "Load input image");
+		dialog.browse(FileDialogType.OPEN, null, null, "Load input image");
 		dialog.onSelect.add(path -> _menuDelegate.onLoad(path));
 	}
 	
@@ -71,5 +75,7 @@ class Root extends VBox
 		outputImage.resource = bitmapData;
 
 		outputImageDimensionsLabel.text = '${bitmapData.width}x${bitmapData.height}';
+
+		_dialog.hideDialog(null);
 	}
 }
