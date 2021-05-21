@@ -1,0 +1,5 @@
+<module>
+    <components>
+        <component file="assets/haxeui/zoom_selector.xml" class="ui.ZoomSelector" alias="ZoomSelector" />
+    </components>
+</module>

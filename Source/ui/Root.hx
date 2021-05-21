@@ -6,6 +6,11 @@ import lime.ui.FileDialog;
 import openfl.display.BitmapData;
 import haxe.ui.containers.VBox;
 
+typedef ImageSize = {
+	width: Int,
+	height: Int
+};
+
 @:build(haxe.ui.macros.ComponentMacros.build("assets/haxeui/root.xml"))
 class Root extends VBox
 {
@@ -13,6 +18,8 @@ class Root extends VBox
 	var _inputTab: InputTab;
 	var _paletteTab: PaletteTab;
 	var _dialog: PyxelatingDialog;
+	var _inputImageSize: ImageSize;
+	var _outputImageSize: ImageSize;
 
 	public function new(menuDelegate: IMenuActions)
 	{
@@ -21,6 +28,8 @@ class Root extends VBox
 		_menuDelegate = menuDelegate;
 
 		_dialog = new PyxelatingDialog();
+		_dialog.closable = false;
+
 		_inputTab = new InputTab();
 		_paletteTab = new PaletteTab();
 
@@ -31,6 +40,8 @@ class Root extends VBox
 		saveMenuButton.onClick = openSaveFileDialog;
 		quitMenuButton.onClick = quit;
 		pyxelateButton.onClick = pyxelate;
+		inputZoomSelector.onChange = e -> updateInputImageSize();
+		outputZoomSelector.onChange = e -> updateOutputImageSize();
 	}
 
 	function pyxelate(event: MouseEvent)
@@ -64,18 +75,63 @@ class Root extends VBox
 	
 	public function displayInputImage(bitmapData: BitmapData)
 	{
+		_inputImageSize = {
+			width: bitmapData.width,
+			height: bitmapData.height
+		};
+
+		inputImage.width = _inputImageSize.width;
+		inputImage.height = _inputImageSize.height;
+
 		inputImage.resource = bitmapData;
-		inputImageDimensionsLabel.text = '${bitmapData.width}x${bitmapData.height}';
+
+		inputImageDimensionsLabel.text = '${_inputImageSize.width}x${_inputImageSize.height}';
+
+		inputZoomSelector.value = 1;
+
+		updateInputImageSize();
 	}
 
 	public function displayOutputImage(bitmapData: BitmapData)
 	{
-		outputImage.width = inputImage.width;
-		outputImage.height = inputImage.height;
+		_outputImageSize = {
+			width: bitmapData.width,
+			height: bitmapData.height
+		};
+		
+		outputImage.width = _outputImageSize.width;
+		outputImage.height = _outputImageSize.height;
+
 		outputImage.resource = bitmapData;
 
-		outputImageDimensionsLabel.text = '${bitmapData.width}x${bitmapData.height}';
+		outputImageDimensionsLabel.text = '${_outputImageSize.width}x${_outputImageSize.height}';
 
+		updateOutputImageSize();
+		
 		_dialog.hideDialog(null);
+	}
+
+	private function updateInputImageSize()
+	{
+		if(_inputImageSize != null)
+		{
+			inputImage.width = _inputImageSize.width * inputZoomSelector.value;
+			inputImage.height = _inputImageSize.height * inputZoomSelector.value;
+
+			inputImageContainer.width = (inputImage.width > inputImageScrollview.width) ? inputImage.width : inputImageScrollview.width;
+			inputImageContainer.height = (inputImage.height > inputImageScrollview.height) ? inputImage.height : inputImageScrollview.height;
+		}
+	}
+
+	private function updateOutputImageSize()
+	{
+		if(_outputImageSize != null)
+		{
+			outputImage.width = _outputImageSize.width * outputZoomSelector.value;
+			outputImage.height = _outputImageSize.height * outputZoomSelector.value;
+
+			outputImageContainer.width = (outputImage.width > outputImageScrollview.width) ? outputImage.width : outputImageScrollview.width;
+			outputImageContainer.height = (outputImage.height > outputImageScrollview.height) ? outputImage.height : outputImageScrollview.height;
+		}
 	}
 }

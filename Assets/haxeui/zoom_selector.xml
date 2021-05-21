@@ -1,0 +1,5 @@
+<hbox>
+    <button id="decreaseButton" text="-" verticalAlign="center" />
+    <label id="zoomLabel" text="1" verticalAlign="center" />
+    <button id="increaseButton" text="+" verticalAlign="center" />
+</hbox>

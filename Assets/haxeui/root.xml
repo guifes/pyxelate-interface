@@ -1,10 +1,5 @@
 <vbox id="topBar" width="100%" height="100%">
     <style>
-        .imageContainer {
-            border: 1px solid black;
-            padding: 20px;
-        }
-
         #sideBar {
             padding: 20px;
         }
@@ -21,13 +16,31 @@
             <tabview id="configTabView" width="100%" height="100%" />
             <button id="pyxelateButton" text="Pyxelate!" width="80" height="40" verticalAlign="bottom" horizontalAlign="center" />
         </vbox>
-        <box styleName="imageContainer" width="100%" height="100%">
-            <image id="inputImage" verticalAlign="center" horizontalAlign="center" />
-            <label id="inputImageDimensionsLabel" verticalAlign="top" horizontalAlign="center" />
-        </box>
-        <box styleName="imageContainer" width="100%" height="100%">
-            <image id="outputImage" verticalAlign="center" horizontalAlign="center" />
-            <label id="outputImageDimensionsLabel" verticalAlign="top" horizontalAlign="center" />
-        </box>
+        <vbox width="100%" height="100%">
+            <hbox horizontalAlign="center">
+                <label text="Zoom: " verticalAlign="center" />
+                <zoom-selector id="inputZoomSelector" />
+                <label text="Resolution: " verticalAlign="center" />
+                <label id="inputImageDimensionsLabel" verticalAlign="center" />
+            </hbox>
+            <scrollview id="inputImageScrollview" width="100%" height="100%">
+                <box id="inputImageContainer">
+                    <image id="inputImage" verticalAlign="center" horizontalAlign="center" />
+                </box>
+            </scrollview>
+        </vbox>
+        <vbox width="100%" height="100%">
+            <hbox horizontalAlign="center">
+                <label text="Zoom: " verticalAlign="center" />
+                <zoom-selector id="outputZoomSelector" />
+                <label text="Resolution: " verticalAlign="center" />
+                <label id="outputImageDimensionsLabel" verticalAlign="center" />
+            </hbox>
+            <scrollview id="outputImageScrollview" width="100%" height="100%">
+                <box id="outputImageContainer">
+                    <image id="outputImage" verticalAlign="center" horizontalAlign="center" />
+                </box>
+            </scrollview>
+        </vbox>
     </hbox>
 </vbox>
