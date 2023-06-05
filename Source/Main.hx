@@ -22,7 +22,7 @@ class Main extends Sprite implements IMenuActions
 
 		_root = new Root(this);
 
-		stage.addChild(_root);
+		addChild(_root);
 	}
 
 	public function getLoadedImage(): String

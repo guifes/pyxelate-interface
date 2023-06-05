@@ -27,9 +27,6 @@ class Root extends VBox
 		
 		_menuDelegate = menuDelegate;
 
-		_dialog = new PyxelatingDialog();
-		_dialog.closable = false;
-
 		_inputTab = new InputTab();
 		_paletteTab = new PaletteTab();
 
@@ -46,6 +43,8 @@ class Root extends VBox
 
 	function pyxelate(event: MouseEvent)
 	{
+		_dialog = new PyxelatingDialog();
+		_dialog.closable = false;
         _dialog.showDialog(true);
 
 		if(configTabView.selectedPage == _inputTab)
